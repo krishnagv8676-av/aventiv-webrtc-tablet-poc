@@ -1,0 +1,21 @@
+.unity-mail-launch-row {
+  display: flex;
+  justify-content: flex-start;
+  margin: 18px 0 8px;
+}
+
+.unity-mail-launch {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #eff6ff;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.28);
+}
+
+.unity-mail-launch:hover {
+  filter: brightness(1.06);
+}

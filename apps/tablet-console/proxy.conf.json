@@ -1,0 +1,21 @@
+{
+  "/network": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/ws": {
+    "target": "ws://localhost:3000",
+    "ws": true,
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/motivation": {
+    "target": "http://localhost:5173",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/motivation": ""
+    }
+  }
+}

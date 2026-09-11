@@ -1,0 +1,10 @@
+<main class="dashboard">
+  <header class="header"><div class="brand"><span class="brand-mark">A</span><div><b>aventiv</b><small>UNITY PLATFORM</small></div></div><div class="system-status"><span></span>All systems operational</div></header>
+  <section class="intro"><div><p class="eyebrow">THURSDAY, SEPTEMBER 03, 2026</p><h1>Good morning, Jordan<span>.</span></h1><p class="subhead">Here is the latest activity across your tablet network.</p></div></section>
+  <div class="unity-mail-launch-row">
+    <button type="button" class="unity-mail-launch" (click)="openUnityMail()">UNITY MAIL / AI TRUST LAYER</button>
+  </div>
+  <app-dashboard-metrics />
+  <app-secure-call />
+  <app-unity-mail-poc *ngIf="showUnityMail()" />
+</main>

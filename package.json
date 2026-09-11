@@ -1,0 +1,24 @@
+{
+  "name": "aventiv-unity-platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*"
+  ],
+  "scripts": {
+    "start": "npm run start:secure --workspace apps/tablet-console",
+    "start:all": "concurrently -k --names \"SERVER,ANGULAR,VUE\" -c \"cyan,magenta,yellow\" \"npm run start:server\" \"npm run start:secure\" \"npm run start:motivation\"",
+    "dev:all": "concurrently -k --names \"SERVER,ANGULAR,VUE\" -c \"cyan,magenta,yellow\" \"npm run start:server\" \"npm run start:secure\" \"npm run start:motivation\"",
+    "start:http": "npm run start --workspace apps/tablet-console",
+    "start:secure": "npm run start:secure --workspace apps/tablet-console",
+    "start:server": "npm run dev --workspace services/signaling",
+    "start:motivation": "npm run dev --workspace apps/motivation-player",
+    "build": "npm run build --workspace apps/tablet-console",
+    "build:motivation": "npm run build --workspace apps/motivation-player"
+  },
+  "devDependencies": {
+    "@esbuild/win32-x64": "^0.21.5",
+    "concurrently": "^10.0.5",
+    "esbuild": "^0.21.5"
+  }
+}

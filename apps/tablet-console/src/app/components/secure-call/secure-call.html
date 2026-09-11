@@ -1,0 +1,67 @@
+<section class="panel call" [class.call-state-live]="callState() === 'live'">
+    
+    <div class="mode">
+        <button [class.selected]="callMode() === 'video'" (click)="selectMode('video')">Video call</button>
+        <button [class.selected]="callMode() === 'audio'" (click)="selectMode('audio')">Audio call</button>
+    </div>
+
+    <div class="call-header">
+        <div>
+            <h2>Secure call</h2>
+            <p>{{ notice() }}</p>
+            <small>{{ participantCount() }} other participant(s)</small>
+        </div>
+        <div class="room">
+            <label>ROOM CODE</label>
+            <input [ngModel]="roomCode()" (ngModelChange)="roomCode.set($event)">
+            <button (click)="startCall()">Join room</button>
+            <button class="share" (click)="copyInvite()">Copy invite</button>
+            <button class="outline" (click)="roomCode.set(generateRoomCode())"
+                title="Generate a new random room code">New room</button>
+        </div>
+    </div>
+
+    <div class="videos">
+        <div class="video-tile">
+            <video #localVideo autoplay muted playsinline></video>
+            <small>You</small>
+        </div>@for (remote of remoteStreams(); track remote.id) {
+        <div class="video-tile remote">
+            <video autoplay playsinline [srcObject]="remote.stream">
+            </video>
+            <small>Participant {{ remote.id.slice(0, 6) }}</small>
+        </div>}
+    </div>
+
+    <div class="call-actions">@if (callState() === 'live')
+        {
+        <button [class.off]="!micOn()" (click)="toggleMic()">
+            {{ micOn() ? 'Mic on' : 'Mic off' }}
+        </button>@if (callMode() === 'video') {
+        <button [class.off]="!cameraOn()" (click)="toggleCamera()">
+            {{ cameraOn() ? 'Camera on' : 'Camera off' }}</button>
+        }<button (click)="recording() ? stopRecording() : startRecording()">
+            {{ recording() ? 'Stop recording' : 'Start recording' }}
+        </button>
+        <button class="danger" (click)="endCall()">End call</button>
+        } @else {
+        <button class="outline" (click)="startCall()">Open call studio</button>
+        }
+    </div>
+
+    <div class="recording-history">
+        <div class="history-heading">
+            <h3>Recordings</h3>
+            <button (click)="clearRecordings()">Clear</button>
+        </div>@if (savedRecordings().length) {@for (item of savedRecordings(); track item.id) {
+        <div class="recording-row">
+            <span>{{ item.room }}</span>
+            <small>{{ item.createdAt }}</small>
+            <a [href]="item.url" [download]="'aventiv-' + item.id + '.webm'">Download</a>
+        </div>
+        }} @else {
+        <p class="empty-recordings">No recordings yet.</p>
+        }
+    </div>
+
+</section>
